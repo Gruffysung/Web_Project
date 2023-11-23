@@ -1,0 +1,22 @@
+.call-container {
+    align-items: center;
+    background-color: rgb(77, 13, 104);
+
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: solid 1px;
+    color: #fff;
+    font-size: 10px;
+
+}
+
+#footer {
+    background-color: rgb(77, 13, 104);
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    color: #FFFFFF;
+}

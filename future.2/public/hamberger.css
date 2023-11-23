@@ -1,0 +1,74 @@
+style * {
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0 auto;
+}
+
+
+
+
+
+header>a.menu_icon i {
+    color: #000;
+    font-size: 40px;
+    padding-top: 5px;
+    transition: .2s ease;
+}
+
+
+
+nav.menu {
+    text-align: center;
+    width: 150px;
+    min-height: calc(100vh - 121px);
+    background-color: #ebebeb;
+    position: absolute;
+    left: -300px;
+    transition: .3s all;
+}
+
+nav.menu>a {
+    display: block;
+    padding: 5px;
+    margin: 15px 0 0px 20px;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+main {
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+
+
+.menu_show {
+    left: 0 !important;
+}
+
+@media screen and (max-width: 425px) {
+    header h1 {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    nav.menu {
+        width: 100%;
+        left: -100%;
+    }
+}
+.menu_show~* {
+    transition: all 0.5s ease;
+    /* เพื่อทำให้การเปลี่ยนขนาดมีการเปลี่ยนแปลงที่นุ่มนวล */
+}
+
+.menu_show~*:not(nav.menu) {
+    
+    margin-left: 200px;
+    /* ขยับเนื้อหาไปด้านขวาเท่ากับขนาดของเมนู */
+}

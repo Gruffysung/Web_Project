@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+    <script src="test.js"></script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Custom CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0">
+    
+    <link rel="stylesheet" href="/public/hamberger.css">
+    
+</head>
+</head>
+
+<style>
+    body {
+    background: linear-gradient(135deg, #a6d9fc, #e9bcfa);
+}
+
+#navbar{
+    background-color: rgb(77, 13, 104);
+}
+#footer{
+    color: white;
+    background-color: rgb(77, 13, 104);
+}
+#link{
+    text-decoration: none;
+}
+
+/*  */
+
+
+  
+  .hh {
+    box-sizing: border-box;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    background-color: transparent;
+    border: 2px solid #e74c3c;
+    border-radius: 0.6em;
+    color: #e74c3c;
+    cursor: pointer;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-self: center;
+        -ms-flex-item-align: center;
+            align-self: center;
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    /* font-weight: 700; */
+  }
+  .hh:hover, .hh:focus {
+    color: #fff;
+    outline: 0;
+  }
+  
+  .first {
+    -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  }
+  .first:hover {
+    box-shadow: 0 0 40px 40px #e74c3c inset;
+  }
+  
+  .third {
+    border-color: #3498db;
+    color: #fff;
+    box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+    -webkit-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+  }
+  .third:hover {
+    box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+  }
+
+  /*  */
+
+  @font-face {
+    font-family: 'Rocher';
+    src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
+  }
+  
+  h1 {
+    font-family: 'Rocher';
+    text-align: center;
+    font-size: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  h1 {
+    margin: 0;
+  }
+  
+  @font-palette-values --Grays {
+    font-family: Rocher;
+    base-palette: 9;
+  }
+  
+  @font-palette-values --Purples {
+    font-family: Rocher;
+    base-palette: 6;
+  }
+  
+  @font-palette-values --Mint {
+    font-family: Rocher;
+    base-palette: 7;
+  }
+  
+  .grays {
+    font-palette: --Grays;
+  }
+  
+  .purples {
+    font-palette: --Purples;
+  }
+  
+  .mint {
+    font-palette: --Mint;
+  }
+  
+</style>
+
+<body>
+
+    <!-- ทำให้เพิ่มข้อมูลเดิมอยู่แล้วในการแก้ไขเพิ่มเติม -->
+
+
+
+
+
+    <!-- Navbar -->
+    <header id="navbar" class="text-light py-3">
+        <div id="change" class="d-flex">
+            <!--icon menu -->
+            <div class="top">
+                <a href="#" class="menu_icon mx-5"><i class="material-icons">dehaze</i></a>
+            </div>
+            <!-- icon motor -->
+            <div class=" col-1">
+                <i class="fas fa-motorcycle"></i>
+            </div>
+            <!-- MFU RIDE -->
+            <div class="col-1">
+                <a class="navbar-brand" href="#">MFU RIDE</a>
+            </div>
+            <div class="col-3">
+
+            </div>
+            <!-- icon phone -->
+            <div class="call-container col-2 mx-5 text-center">
+                <i class="fas fa-phone-alt"></i>
+                <span>call us +66**</span>
+            </div>
+            <!-- Name -->
+            <div class="col-1 ">
+                <a style="font-size: 1rem;" class="navbar-brand mx-3" href="#">Lexend Deca</a>
+            </div>
+            <!-- profile -->
+            <div class="col-1 ">
+                <i class="fas fa-user mx-5"></i>
+            </div>
+            <div class="col-1 d-flex">
+                <p>SIGN OUT</p>
+                <a href="/Project/views/mainpage/login.html"> <i class="fa fa-sign-out mx-2 mt-1" aria-hidden="true"></i></a>
+            </div>
+
+        </div>
+    </header>
+
+
+    <nav class="menu">
+        <a href="/Project/views/staff/homestaff.html" class="item_menu">HOME</a>
+        <a href="/Project/views/dashboard-history/dashboard.html" class="item_menu">DASHBOARD</a>
+        <a href="/Project/views/dashboard-history/history.html" class="item_menu">HISTORY</a>
+        <a href="/Project/views/mainpage/login.html" class="item_menu">LOG OUT</a>
+
+    </nav>
+
+
+    <h1 class="purples">EDIT</h1>
+    <h1 class="mint">Information</h1>
+    <div class="container">
+        <form id="formUpload" enctype="multipart/form-data">
+            <input type="file" name="filetoupload" class="form-control my-2">
+            <button type="submit" class="btn btn-outline-primary">Upload</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <label for="name">Name</label>
+        <input type="name" class="form-control" placeholder="Enter name of motocycle">
+
+        <label for="name">ID</label>
+        <input type="name" class="form-control" placeholder="Enter motocycle ID">
+
+        <label for="cars">Status</label>
+        <select name="status" class="form-select" id="status">
+            <option value="volvo">Available</option>
+            <option value="saab">Borrowed</option>
+            <option value="mercedes">Disable</option>
+            <option value="audi">Waiting</option>
+        </select>
+
+        <label for="name">Detail</label>
+        <input type="name" class="form-control p-5" placeholder="Enter detail of motocycle">
+
+        <div class="traffic">
+            <legend>Has a traffic act?</legend>
+            <div class="d-flex">
+                <input type="radio" name="traffic" value="Yes">Yes<br>
+                <div class="mx-5">
+                    <input id="space" type="radio" name="traffic" value="No">No<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="insurance">
+            <legend>Has a insurance?</legend>
+            <div class="d-flex">
+                <input type="radio" name="insu" value="Yes">Yes<br>
+                <div class="mx-5">
+                    <input id="space" type="radio" name="insu" value="No">No<br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex mx-5">
+        <a href="/Project/views/staff/homestaff.html"><button class="hh third mx-5">SAVE</button></a>
+        <a href="/Project/views/staff/homestaff.html"><button class="hh first">CANCLE</button></a>
+    </div>
+
+
+
+    <!-- Footer -->
+    <div>
+      <footer id="footer" class=" text-white text-center py-3">
+       <div>
+           <p>&copy; SERVICE IN MFU : +xxx-xxxx-xxxx</p>
+       </div>
+   </footer> 
+   </div>
+
+    <script>
+        const formUpload = document.querySelector('#formUpload');
+        formUpload.onsubmit = function (e) {
+            e.preventDefault();
+            const option = {
+                method: 'POST',
+                body: new FormData(this)
+            }
+            upload(option);
+        }
+
+        async function upload(option) {
+            try {
+                const response = await fetch('/uploading', option);
+                if (response.ok) {
+                    const data = await response.text();
+                    alert(data);
+                }
+                else {
+                    throw Error('upload failed');
+                }
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("body").on('click', '.top', function () {
+                $("nav.menu").toggleClass("menu_show");
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" title="Coding design">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Responsive HTML Table With Pure CSS - Web Design/UI Design</title>
+       <!-- Font Awesome Icons -->
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+       <!-- Custom CSS -->
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0">
+      
+       <link rel="stylesheet" href="/public/hamberger.css">
+</head>
+
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+  
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #a6d9fc, #e9bcfa);
+  }
+  
+  #navbar{
+    background-color: rgb(77, 13, 104);
+  }
+  #footer{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    color: white;
+      background-color: rgb(77, 13, 104);
+  }
+  #link{
+    text-decoration: none;
+  }
+  
+  h1{
+    color: rgb(0, 0, 0);
+  }
+  #cancle{
+    color: #b30021;
+  }
+  
+  .table__header {
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .table__header .input-group {
+    width: 35%;
+    height: 100%;
+    background-color: #fff5;
+    padding: 0 .8rem;
+    border-radius: 2rem;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    transition: .2s;
+  }
+  
+  .table__header .input-group:hover {
+    width: 45%;
+    background-color: #fff8;
+    box-shadow: 0 .1rem .4rem #0002;
+  }
+  
+  .table__header .input-group img {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  
+  .table__header .input-group input {
+    width: 100%;
+    padding: 0 .5rem 0 .3rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+  
+  .table__body {
+    width: 95%;
+    max-height: calc(89% - 1.6rem);
+    background-color: #fffb;
+  
+    margin: .8rem auto;
+    border-radius: .6rem;
+  
+    overflow: auto;
+    overflow: overlay;
+  }
+  
+  .table__body::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  
+  .table__body::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+  }
+  
+  .table__body:hover::-webkit-scrollbar-thumb{ 
+    visibility: visible;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  td img {
+    width: 36px;
+    height: 36px;
+    margin-right: .5rem;
+    border-radius: 50%;
+  
+    vertical-align: middle;
+  }
+  
+  table, th, td {
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: left;
+  }
+  
+  thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #d5d1defe;
+    cursor: pointer;
+    text-transform: capitalize;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #0000000b;
+  }
+  
+  tbody tr {
+    --delay: .1s;
+    transition: .5s ease-in-out var(--delay), background-color 0s;
+  }
+  
+  tbody tr.hide {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  
+  tbody tr:hover {
+    background-color: #fff6 !important;
+  }
+  
+  tbody tr td,
+  tbody tr td p,
+  tbody tr td img {
+    transition: .2s ease-in-out;
+  }
+  
+  tbody tr.hide td,
+  tbody tr.hide td p {
+    padding: 0;
+    font: 0 / 0 sans-serif;
+    transition: .2s ease-in-out .5s;
+  }
+  
+  tbody tr.hide td img {
+    width: 0;
+    height: 0;
+    transition: .2s ease-in-out .5s;
+  }
+  
+  .status {
+    padding: .4rem 0;
+    border-radius: 2rem;
+    text-align: center;
+  }
+  
+  .status.delivered {
+    background-color: #86e49d;
+    color: #006b21;
+  }
+  
+  .status.cancelled {
+    background-color: #d893a3;
+    color: #b30021;
+  }
+  
+  .status.pending {
+    background-color: #ebc474;
+  }
+  
+  .status.shipped {
+    background-color: #6fcaea;
+  }
+  
+  
+  @media (max-width: 1000px) {
+    td:not(:first-of-type) {
+        min-width: 12.1rem;
+    }
+  }
+  
+  thead th span.icon-arrow {
+    display: inline-block;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    border: 1.4px solid transparent;
+    
+    text-align: center;
+    font-size: 1rem;
+    
+    margin-left: .5rem;
+    transition: .2s ease-in-out;
+  }
+  
+  thead th:hover span.icon-arrow{
+    border: 1.4px solid #6c00bd;
+  }
+  
+  thead th:hover {
+    color: #6c00bd;
+  }
+  
+  thead th.active span.icon-arrow{
+    background-color: #6c00bd;
+    color: #fff;
+  }
+  
+  thead th.asc span.icon-arrow{
+    transform: rotate(180deg);
+  }
+  
+  thead th.active,tbody td.active {
+    color: #6c00bd;
+  }
+  
+  .export__file {
+    position: relative;
+  }
+  
+  .export__file .export__file-btn {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background: #fff6 url(images/export.png) center / 80% no-repeat;
+    border-radius: 50%;
+    transition: .2s ease-in-out;
+  }
+  
+  .export__file .export__file-btn:hover { 
+    background-color: #fff;
+    transform: scale(1.15);
+    cursor: pointer;
+  }
+  
+  .export__file input {
+    display: none;
+  }
+  
+  .export__file .export__file-options {
+    position: absolute;
+    right: 0;
+    
+    width: 12rem;
+    border-radius: .5rem;
+    overflow: hidden;
+    text-align: center;
+  
+    opacity: 0;
+    transform: scale(.8);
+    transform-origin: top right;
+    
+    box-shadow: 0 .2rem .5rem #0004;
+    
+    transition: .2s;
+  }
+  
+  .export__file input:checked + .export__file-options {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 100;
+  }
+  
+  .export__file .export__file-options label{
+    display: block;
+    width: 100%;
+    padding: .6rem 0;
+    background-color: #f2f2f2;
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  
+    transition: .2s ease-in-out;
+  }
+  
+  .export__file .export__file-options label:first-of-type{
+    padding: 1rem 0;
+    background-color: #86e49d !important;
+  }
+  
+  .export__file .export__file-options label:hover{
+    transform: scale(1.05);
+    background-color: #fff;
+    cursor: pointer;
+  }
+  
+  .export__file .export__file-options img{
+    width: 2rem;
+    height: auto;
+  }
+  
+  #l{
+    color: violet;
+  }
+  
+</style>
+<body>
+
+      <!-- Navbar -->
+      <header id="navbar" class="text-light py-3">
+        <div id="change" class="d-flex">
+            <!--icon menu -->
+            <div class="top">
+                <a href="#" class="menu_icon mx-5"><i class="material-icons">dehaze</i></a>
+            </div>
+            <!-- icon motor -->
+            <div class=" col-1">
+                <i class="fas fa-motorcycle"></i>
+            </div>
+            <!-- MFU RIDE -->
+            <div class="col-1">
+                <a class="navbar-brand" href="#">MFU RIDE</a>
+            </div>
+            <div class="col-3">
+
+            </div>
+              <!-- icon phone -->
+              <div class="call-container col-2 mx-5 text-center">
+                <i class="fas fa-phone-alt"></i>
+                <span>call us +66**</span>
+            </div>
+            <!-- Name -->
+            <div class="col-1 ">
+                <a style="font-size: 1rem;" class="navbar-brand mx-3" href="#">Lexend Deca</a>
+            </div>
+            <!-- profile -->
+            <div class="col-1 ">
+                <i class="fas fa-user mx-5"></i>
+            </div>
+            <div class="col-1 d-flex">
+                <p>SIGN OUT</p>
+                <a href="#"> <i class="fa fa-sign-out mx-2 mt-1" aria-hidden="true"></i></a>
+            </div>
+
+
+        </div>
+    </header>
+    <nav class="menu">
+        <a href="/Project/views/lender/listlender.html" class="item_menu">REQUEST</a>
+        <a href="/Project/views/dashboard-history/dashboard.html" class="item_menu">DASHBOARD</a>
+        <a href="/Project/views/dashboard-history/history.html" class="item_menu">HISTORY</a>
+        <a href="/Project/views/mainpage/login.html" class="item_menu">LOG OUT</a>
+
+    </nav>
+
+    <main class="table">
+        <section class="table__header">
+                <h1 id="l">User's Request</h1>
+            <div class="input-group">
+                <input class="p-2 s" type="search" placeholder="Search...">
+            </div>
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Request number <span class="icon-arrow">&UpArrow;</span></t0000000000000000000h>
+                        <th> Date <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> User <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> ID motocycle <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Name motocycle <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Process <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Borrow date <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Return date <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Location <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Action<span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> 1 </td>
+                        <td> 11/10/2566 </td>
+                        <td> <img src="/public/img/profile.png" alt=""> Leo3</td>
+                        <td> 3 </td>
+                        <td> <img src="/public/img/mo1.png" alt="">Honda</td>
+                        <td> Borrow </td>
+                        <td> 16/10/2566 </td>
+                        <td> 15/11/2566 </td>
+                        <td> D1 </td>
+                        <td>
+                            <a href="#"><i class="material-icons">check</i></a>
+                            <a id="cancle" href="#"><i class="material-icons">cancel</i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 2 </td>
+                        <td> 11/10/2566 </td>
+                        <td> <img src="/public/img/profile.png" alt="">Mimi2</td>
+                        <td> 2 </td>
+                        <td> <img src="/public/img/mo2.png" alt="">Honda</td>
+                        <td> Return</td>
+                        <td> 19/10/2566 </td>
+                        <td> 18/11/2566 </td>
+                        <td> L1 </td>
+                        <td>
+                            <a href="#"><i class="material-icons">check</i></a>
+                            <a id="cancle" href="#"><i class="material-icons">cancel</i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+         <!-- Footer -->
+    <div>
+      <footer id="footer" class=" text-white text-center py-3">
+       <div>
+           <p>&copy; SERVICE IN MFU : +xxx-xxxx-xxxx</p>
+       </div>
+   </footer> 
+   </div>
+    
+    
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+    
+        <script>
+            $(document).ready(function () {
+                $("body").on('click', '.top', function () {
+                    $("nav.menu").toggleClass("menu_show");
+                });
+            });
+        </script>
+</body>
+
+</html>

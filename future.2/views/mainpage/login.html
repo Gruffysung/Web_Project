@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glassmorphism Login Form | CodingNepal</title>
+</head>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.text{
+    position: absolute;
+    height: 80%;
+}
+.text h2 {
+    color: #ffffff; /* กำหนดสีข้อความ "MFU RIDE" เป็นสีขาว */
+  }
+
+body::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("https://cdn.pixabay.com/photo/2016/04/26/21/14/cats-1355326_1280.png"), #6c2285;
+  background-size: 20%;
+  background-position: center;
+}
+
+.wrapper {
+  width: 400px;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  background-color: rgb(255, 255, 255); 
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+.input-field {
+  position: relative;
+  border-bottom: 2px solid #000000;
+  margin: 15px 0;
+}
+
+.input-field label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  color: #000000;
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.15s ease;
+}
+
+.input-field input {
+  width: 100%;
+  height: 40px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #000000;
+}
+
+.input-field input:focus~label,
+.input-field input:valid~label {
+  font-size: 0.8rem;
+  top: 10px;
+  transform: translateY(-120%);
+}
+
+.forget {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 25px 0 35px 0;
+  color: #000000;
+}
+
+
+#remember {
+  accent-color: #000000;
+}
+
+.forget label {
+  display: flex;
+  align-items: center;
+}
+
+.forget label p {
+  margin-left: 8px;
+}
+
+.wrapper a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.wrapper a:hover {
+  text-decoration: underline;
+}
+
+button {
+    background: #9b59b6;
+    border-color: #d9d9d9;
+  font-weight: 600;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 16px;
+  border: 2px solid transparent;
+  transition: 0.3s ease;
+}
+
+button:hover {
+    background: #d9d9d9;
+    border-color: #9b59b6;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.register {
+  text-align: center;
+  margin-top: 30px;
+  color: #000000;
+}
+</style>
+<body>
+    <div class="text">
+        <h2 >MFU RIDE</h2>
+    </div>
+  <div class="wrapper ">
+    <form action="#">
+      <h2>Login</h2>
+        <div class="input-field">
+        <input type="text" required>
+        <label>Enter your email</label>
+      </div>
+      <div class="input-field">
+        <input type="password" required>
+        <label>Enter your password</label>
+      </div>
+      <div class="forget">
+        <label for="remember">
+          <input type="checkbox" id="remember">
+          <p>Remember me</p>
+        </label>
+        <a href="#">Forgot password?</a>
+      </div>
+      <a href="/Project/views/users/home.html"><button type="submit">Log In</button></a>
+      <div class="register">
+        <p>Don't have an account? <a href="/Project/views/mainpage/register.html">Register</a></p>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
