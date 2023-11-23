@@ -6,13 +6,21 @@ const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json();
 const bcrypt = require("bcrypt");
+const myPlaintextPassword = 's0/\/\P4$$w0rD'
+const saltRounds = 10;
 const dbConnection = require("./db");
 const app = express();
+app.use(cors());
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "/views/mainpage", "login.html"));
+});
+
+app.get("/register", (req, res) => {
+    res.sendFile(path.join(__dirname, "/views/mainpage", "register.html"));
 });
 
 app.get("/main", async (req, res) => {
@@ -24,9 +32,9 @@ app.get("/main", async (req, res) => {
                     console.log(err);
                     return res.status(400).send();
                 }
-                // res.status(200).json(result);
-                const filePath = path.join(__dirname, "/views/mainpage", "main.html");
-                res.sendFile(filePath);
+                res.status(200).json(result);
+                // const filePath = path.join(__dirname, "/views/mainpage", "main.html");
+                // res.sendFile(filePath);
             }
         );
     } catch (err) {
@@ -84,7 +92,7 @@ app.post("/login", async (req, res) => {
 });
 
 // Register
-app.post("/register", jsonParser, async (req, res) => {
+app.post('/register', jsonParser, async (req, res) => {
     const {
         firstname,
         lastname,
@@ -97,62 +105,35 @@ app.post("/register", jsonParser, async (req, res) => {
     } = req.body;
 
     try {
-        // Check if the email is already registered
-        const emailExists = await new Promise((resolve, reject) => {
-            dbConnection.query(
-                "SELECT * FROM users WHERE email = ?",
-                [email],
-                (err, result, fields) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(result.length > 0);
-                    }
+        // Hash the password using bcrypt
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+        // Insert user into the database
+        dbConnection.query(
+            'INSERT INTO users(firstname, lastname, username, email, password, phone, address, gender, urole) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [
+                firstname,
+                lastname,
+                username,
+                email,
+                hashedPassword, // ใช้พาสเวิร์ดที่ถูกแฮชแล้ว
+                phone,
+                address,
+                gender,
+                'user',
+            ],
+            (err, result) => {
+                if (err) {
+                    console.error('Error inserting user:', err);
+                    res.status(500).json({ error: 'Internal Server Error' });
+                    return;
                 }
-            );
-        });
-
-        if (emailExists) {
-            return res.status(400).json({ error: "Email is already registered" });
-        }
-
-        // Hash the password before storing it in the database
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Insert the user into the database
-        const insertResult = await new Promise((resolve, reject) => {
-            dbConnection.query(
-                "INSERT INTO users(firstname, lastname, username, email, password, phone, address, gender, urole) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                [
-                    firstname,
-                    lastname,
-                    username,
-                    email,
-                    hashedPassword,
-                    phone,
-                    address,
-                    gender,
-                    "user",
-                ],
-                (err, result, fields) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(result);
-                    }
-                }
-            );
-        });
-
-        return res
-            .status(201)
-            .json({
-                message: "User registered successfully!",
-                userId: insertResult.insertId,
-            });
+                res.status(201).json({ message: 'User registered successfully!', userId: result.insertId });
+            }
+        );
     } catch (err) {
-        console.log("Server error during registration", err);
-        return res.status(500).send();
+        console.error('Error hashing password:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
@@ -574,7 +555,7 @@ app.post("/detailstaff/:email", async (req, res) => {
     try {
         // Insert into 'borrowing'
         dbConnection.query(
-            "INSERT INTO motorcycles (motorcycle_name, motorcycle_detail, motorcycle_image, motorcycle_status, motorcycle_insurance, motorcycle_traffic) VALUES (?, ?, ?, ?, ?, ?)" ,
+            "INSERT INTO motorcycles (motorcycle_name, motorcycle_detail, motorcycle_image, motorcycle_status, motorcycle_insurance, motorcycle_traffic) VALUES (?, ?, ?, ?, ?, ?)",
             [
                 motorcycle_name, motorcycle_detail, motorcycle_image, motorcycle_status, motorcycle_insurance, motorcycle_traffic, email
             ],
@@ -622,5 +603,5 @@ app.post("/detailstaff/:email", async (req, res) => {
 
 
 
-app.get("/", (req, res) => res.send("Hello World!eeee"));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "/views/mainpage", "main.html")));
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
